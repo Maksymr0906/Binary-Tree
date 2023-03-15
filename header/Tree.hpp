@@ -5,9 +5,16 @@
 using namespace std;
 
 struct Tree {
-    int numberOfClasses, numberOfSubclasses;
-    std::string placeOFResidence;
+    int numberOfSubclasses;
+    std::string nameOfClass, placeOFResidence;
 
-    Tree *brother;
-    Tree *son;
+    Tree *left;
+    Tree *right;
 };
+
+void addNewElementToTree(const int &numberOfSubclasses, const string &nameOfClass, const string &placeOfResidence);
+void printRimFromLeftToRight();
+void printNodesWithTheSamePlaceOfResidence();
+void printTree();
+void printTheLargestBranch();
+void findPlaceOfResidenceWithTheLargestNumberOfSubclasses();
