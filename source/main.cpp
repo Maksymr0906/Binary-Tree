@@ -4,16 +4,18 @@
 
 using namespace std;
 
-Tree *root;
-
 int main() {
     Option option{};
-
+    Tree *root{nullptr};
+    Data data{};
     do  {
+        instruction();
         option = getOption();
         
         switch (option) {
         case Option::ADD_ELEMENT:
+            data = fillData();
+            addNewElementToTree(root, data);
             break;
         
         case Option::PRINT_RIM_FROM_LEFT_TO_RIGHT:
@@ -29,11 +31,12 @@ int main() {
             break;
 
         case Option::PRINT_TREE:
+            printTree(root, 0);
             break;
 
         default:
+            std::cout << "Incorrect option." << std::endl;
             break;
         }
     } while (option != Option::EXIT);
-    
 }
