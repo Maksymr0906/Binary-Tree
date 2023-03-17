@@ -173,34 +173,66 @@ Tree* findNodeWithTheLargestNumberOfSubclasses(Tree *root) {
     return maxNode;
 }
 
-bool isPlaceOfResidenceExistInVector(const std::string &placeOfResidence, vector<string> &placesOfResidence) {
-    for (size_t i = 0; i < placesOfResidence.size(); i++) {
-        if(placeOfResidence == placesOfResidence[i])
+bool isPlaceOfResidenceExistInVector(const std::string &placeOfResidence, const vector<string> &placesOfResidence) {
+    for (const auto& place : placesOfResidence) {
+        if (placeOfResidence == place)
             return true;
     }
-
     return false;
 }
 
 void fillVectorWithPlacesOfResidence(Tree* root, vector<string> &placesOfResidence) {
-    if(root == nullptr) {
+    if (root == nullptr) {
         return ;
     }
-    
-    if(!isPlaceOfResidenceExistInVector(root->data.placeOfResidence, placesOfResidence)) {
+
+    if (!isPlaceOfResidenceExistInVector(root->data.placeOfResidence, placesOfResidence)) {
         placesOfResidence.push_back(root->data.placeOfResidence);
     }
 
-        fillVectorWithPlacesOfResidence(root->left, placesOfResidence);
-        fillVectorWithPlacesOfResidence(root->right, placesOfResidence);
+    fillVectorWithPlacesOfResidence(root->left, placesOfResidence);
+    fillVectorWithPlacesOfResidence(root->right, placesOfResidence);
+}
+
+void printNodesWithSamePlaceOfResidence(Tree *root, const string& placeOfResidence) {
+    if (root == nullptr) {
+        return ;
+    }
+
+    if (root->data.placeOfResidence == placeOfResidence) {
+        printElementOfTree(root->data);
+    }
+
+    printNodesWithSamePlaceOfResidence(root->left, placeOfResidence);
+    printNodesWithSamePlaceOfResidence(root->right, placeOfResidence);
+}
+
+void countNodesWithSamePlaceOfResidence(Tree *root, const string &placeOfResidence, int &counter) {
+    if(root == nullptr) {
+        return ;
+    }
+
+    if(root->data.placeOfResidence == placeOfResidence) {
+        counter++;
+    }
+
+    countNodesWithSamePlaceOfResidence(root->left, placeOfResidence, counter);
+    countNodesWithSamePlaceOfResidence(root->right, placeOfResidence, counter);
 }
 
 void findNodesWithSamePlaceOfResidence(Tree *root) {
     vector<string> placesOfResidence;
     fillVectorWithPlacesOfResidence(root, placesOfResidence);
 
-    for (auto& val: placesOfResidence)
-    {
-        std::cout << val << std::endl;
-    }   
+    for (const auto& placeOfResidence : placesOfResidence) {
+        int counter = 0;
+        countNodesWithSamePlaceOfResidence(root, placeOfResidence, counter);
+
+
+        if (counter >= 2) {
+            std::cout << "Nodes with place of residence " << placeOfResidence << ":" << std::endl;
+            printNodesWithSamePlaceOfResidence(root, placeOfResidence);
+            std::cout << std::endl;
+        }
+    }
 }

@@ -32,6 +32,7 @@ int main() {
             break;
         
         case Option::FIND_NODE_WHERE_THE_LARGEST_NUMBER_OF_CLASSES_AND_SUBCLASSES:
+            printArticle();
             node = findNodeWithTheLargestNumberOfSubclasses(root);
             printElementOfTree(node->data);
 
