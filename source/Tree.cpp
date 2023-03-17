@@ -151,3 +151,24 @@ void printBiggestBranch(Tree *root) {
         printElementOfTree(data);
     }
 }
+
+Tree* findNodeWithTheLargestNumberOfSubclasses(Tree *root) {
+    if (root == nullptr) {
+        return nullptr;
+    }
+    
+    Tree *maxNode = root;
+    if (root->left != nullptr) {
+        Tree *leftMax = findNodeWithTheLargestNumberOfSubclasses(root->left);
+        if (leftMax->data.numberOfSubclasses > maxNode->data.numberOfSubclasses) {
+            maxNode = leftMax;
+        }
+    }
+    if (root->right != nullptr) {
+        Tree *rightMax = findNodeWithTheLargestNumberOfSubclasses(root->right);
+        if (rightMax->data.numberOfSubclasses > maxNode->data.numberOfSubclasses) {
+            maxNode = rightMax;
+        }
+    }
+    return maxNode;
+}

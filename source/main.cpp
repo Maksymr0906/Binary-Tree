@@ -7,6 +7,7 @@ using namespace std;
 int main() {
     Option option{};
     Tree *root{nullptr};
+    Tree *node;
     Data data{};
     do  {
         instruction();
@@ -29,7 +30,11 @@ int main() {
         case Option::PRINT_NODES_WITH_SIMILAR_PLACE_OF_RESIDENCE:
             break;
         
-        case Option::FIND_PLACE_WHERE_THE_LARGEST_NUMBER_OF_CLASSES_AND_SUBCLASSES:
+        case Option::FIND_NODE_WHERE_THE_LARGEST_NUMBER_OF_CLASSES_AND_SUBCLASSES:
+            node = findNodeWithTheLargestNumberOfSubclasses(root);
+            printElementOfTree(node->data);
+
+            delete node;
             break;
         
         case Option::PRINT_THE_LARGEST_BRANCH:
@@ -37,11 +42,13 @@ int main() {
                 printArticle();
                 printBiggestBranch(root);
             }
+            else std::cout << "The tree is empty" << std::endl;
             break;
         case Option::PRINT_PICTURE_OF_TREE:
             if(root != nullptr) {
                 printPictureOfTree(root, 0);
             }
+            else std::cout << "The tree is empty" << std::endl;
             break;
 
         case Option::PRINT_TREE:

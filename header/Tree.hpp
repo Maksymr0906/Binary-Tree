@@ -24,7 +24,7 @@ void printNodesWithTheSamePlaceOfResidence(Tree *&root);
 void printTree(Tree *&root);
 void printBiggestBranch(Tree *root);
 void printBiggestBranchHelper(Tree *root, std::vector<Data>& biggestBranch);
-void findPlaceOfResidenceWithTheLargestNumberOfSubclasses(Tree *&root);
+Tree* findNodeWithTheLargestNumberOfSubclasses(Tree *root);
 string toLowerCase(const string &s);
 bool compareTwoStrings(const string &first, const string &second);
 size_t getSmallerSizeOfStrings(const string &f, const string &s);
