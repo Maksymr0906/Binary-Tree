@@ -7,7 +7,8 @@ void instruction() {
               << "4 - finding the place of residence where the largest number of classes and subclasses is located" << std::endl
               << "5 - print the largest branch" << std::endl
               << "6 - print the entire tree" << std::endl
-              << "7 - exit" << std::endl;
+              << "7 - print the picture of tree" << std::endl
+              << "8 - exit" << std::endl;
 }
 
 Option getOption() {

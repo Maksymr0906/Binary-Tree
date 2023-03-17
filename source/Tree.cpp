@@ -103,3 +103,37 @@ void printFromLeftToRight(Tree *root) {
         }
     }
 }
+
+int printTheLargestBranch(Tree *&root) {
+    if (root == nullptr) {
+        return 0;
+    }
+
+    int leftLength = printTheLargestBranch(root->left);
+    int rightLength = printTheLargestBranch(root->right);
+
+    if (leftLength >= rightLength) {
+        printElementOfTree(root);
+        return leftLength + 1;
+    } else {
+        printElementOfTree(root);
+        return rightLength + 1;
+    }
+}
+
+void printPictureOfTree(Tree *&root, int space) {
+     if(root == nullptr) {
+        return ;
+    }
+
+    space+=10;
+    printPictureOfTree(root->right, space);
+
+    cout << endl;
+    for (size_t i = 10; i < space; i++) {
+        cout << " ";
+    }
+    
+    cout << root->data.nameOfClass << endl;
+    printPictureOfTree(root->left, space);
+}

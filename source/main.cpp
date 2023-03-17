@@ -33,6 +33,15 @@ int main() {
             break;
         
         case Option::PRINT_THE_LARGEST_BRANCH:
+            if(root != nullptr) {
+                printArticle();
+                printTheLargestBranch(root);
+            }
+            break;
+        case Option::PRINT_PICTURE_OF_TREE:
+            if(root != nullptr) {
+                printPictureOfTree(root, 0);
+            }
             break;
 
         case Option::PRINT_TREE:
