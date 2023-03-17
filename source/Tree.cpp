@@ -21,6 +21,12 @@ bool compareTwoStrings(const string &first, const string &second) {
         if(firstString[i] < secondString[i]) {
             return true;
         }
+        else if(firstString[i] == secondString[i]) {
+            continue;
+        }
+        else if(firstString[i] != secondString[i]) {
+            return false;
+        }
     }
 
     return false;
