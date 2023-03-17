@@ -28,6 +28,7 @@ int main() {
             break;
 
         case Option::PRINT_NODES_WITH_SIMILAR_PLACE_OF_RESIDENCE:
+            findNodesWithSamePlaceOfResidence(root);
             break;
         
         case Option::FIND_NODE_WHERE_THE_LARGEST_NUMBER_OF_CLASSES_AND_SUBCLASSES:

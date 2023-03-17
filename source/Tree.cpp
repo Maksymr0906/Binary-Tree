@@ -35,7 +35,7 @@ Data fillData() {
     getline(cin, d.nameOfClass);
 
     std::cout << "Enter the place of residence: ";
-    getline(cin, d.placeOFResidence);
+    getline(cin, d.placeOfResidence);
 
     std::cout << "Enter the number of subclasses: ";
     std::cin >> d.numberOfSubclasses;
@@ -52,7 +52,7 @@ void createElementOfTree(Tree *&element, const Data &d) {
 
 void printElementOfTree(Data &data) {
     std::cout << std::setw(25) << data.nameOfClass
-              << std::setw(25) << data.placeOFResidence
+              << std::setw(25) << data.placeOfResidence
               << std::setw(25) << data.numberOfSubclasses << std::endl;
 }
 
@@ -171,4 +171,36 @@ Tree* findNodeWithTheLargestNumberOfSubclasses(Tree *root) {
         }
     }
     return maxNode;
+}
+
+bool isPlaceOfResidenceExistInVector(const std::string &placeOfResidence, vector<string> &placesOfResidence) {
+    for (size_t i = 0; i < placesOfResidence.size(); i++) {
+        if(placeOfResidence == placesOfResidence[i])
+            return true;
+    }
+
+    return false;
+}
+
+void fillVectorWithPlacesOfResidence(Tree* root, vector<string> &placesOfResidence) {
+    if(root == nullptr) {
+        return ;
+    }
+    
+    if(!isPlaceOfResidenceExistInVector(root->data.placeOfResidence, placesOfResidence)) {
+        placesOfResidence.push_back(root->data.placeOfResidence);
+    }
+
+        fillVectorWithPlacesOfResidence(root->left, placesOfResidence);
+        fillVectorWithPlacesOfResidence(root->right, placesOfResidence);
+}
+
+void findNodesWithSamePlaceOfResidence(Tree *root) {
+    vector<string> placesOfResidence;
+    fillVectorWithPlacesOfResidence(root, placesOfResidence);
+
+    for (auto& val: placesOfResidence)
+    {
+        std::cout << val << std::endl;
+    }   
 }
