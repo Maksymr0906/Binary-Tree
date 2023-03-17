@@ -35,8 +35,6 @@ int main() {
             printArticle();
             node = findNodeWithTheLargestNumberOfSubclasses(root);
             printElementOfTree(node->data);
-
-            delete node;
             break;
         
         case Option::PRINT_THE_LARGEST_BRANCH:

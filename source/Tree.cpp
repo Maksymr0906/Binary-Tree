@@ -76,7 +76,7 @@ void addNewElementToTree(Tree *&root, const Data &d) {
     }
 }
 
-void printTree(Tree *&root) {
+void printTree(Tree *root) {
     if(root == nullptr) {
         return ;
     }
@@ -110,7 +110,7 @@ void printFromLeftToRight(Tree *root) {
     }
 }
 
-void printPictureOfTree(Tree *&root, int space) {
+void printPictureOfTree(Tree *root, int space) {
      if(root == nullptr) {
         return ;
     }
