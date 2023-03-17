@@ -4,6 +4,7 @@
 #include <iostream>
 #include <iomanip>
 #include <queue>
+#include <vector>
 
 using namespace std;
 struct Data{
@@ -21,11 +22,12 @@ void addNewElementToTree(Tree *&root, const Data& d);
 void printFromLeftToRight(Tree *root);
 void printNodesWithTheSamePlaceOfResidence(Tree *&root);
 void printTree(Tree *&root);
-int printTheLargestBranch(Tree *&root);
+void printBiggestBranch(Tree *root);
+void printBiggestBranchHelper(Tree *root, std::vector<Data>& biggestBranch);
 void findPlaceOfResidenceWithTheLargestNumberOfSubclasses(Tree *&root);
 string toLowerCase(const string &s);
 bool compareTwoStrings(const string &first, const string &second);
 size_t getSmallerSizeOfStrings(const string &f, const string &s);
 void createElementOfTree(Tree *&element, const Data &d);
-void printElementOfTree(Tree *&element);
+void printElementOfTree(Data &data);
 void printPictureOfTree(Tree *&root, int space);

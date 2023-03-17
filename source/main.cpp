@@ -35,7 +35,7 @@ int main() {
         case Option::PRINT_THE_LARGEST_BRANCH:
             if(root != nullptr) {
                 printArticle();
-                printTheLargestBranch(root);
+                printBiggestBranch(root);
             }
             break;
         case Option::PRINT_PICTURE_OF_TREE:

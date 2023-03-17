@@ -50,10 +50,10 @@ void createElementOfTree(Tree *&element, const Data &d) {
     element->right = nullptr;
 }
 
-void printElementOfTree(Tree *&element) {
-    std::cout << std::setw(25) << element->data.nameOfClass
-              << std::setw(25) << element->data.placeOFResidence
-              << std::setw(25) << element->data.numberOfSubclasses << std::endl;
+void printElementOfTree(Data &data) {
+    std::cout << std::setw(25) << data.nameOfClass
+              << std::setw(25) << data.placeOFResidence
+              << std::setw(25) << data.numberOfSubclasses << std::endl;
 }
 
 void addNewElementToTree(Tree *&root, const Data &d) {
@@ -76,7 +76,7 @@ void printTree(Tree *&root) {
     }
 
     printTree(root->left);
-    printElementOfTree(root);
+    printElementOfTree(root->data);
     printTree(root->right);
 }
 
@@ -92,7 +92,7 @@ void printFromLeftToRight(Tree *root) {
         Tree *current = q.front();
         q.pop();
 
-        printElementOfTree(current);
+        printElementOfTree(current->data);
 
         if (current->left != nullptr) {
             q.push(current->left);
@@ -101,23 +101,6 @@ void printFromLeftToRight(Tree *root) {
         if (current->right != nullptr) {
             q.push(current->right);
         }
-    }
-}
-
-int printTheLargestBranch(Tree *&root) {
-    if (root == nullptr) {
-        return 0;
-    }
-
-    int leftLength = printTheLargestBranch(root->left);
-    int rightLength = printTheLargestBranch(root->right);
-
-    if (leftLength >= rightLength) {
-        printElementOfTree(root);
-        return leftLength + 1;
-    } else {
-        printElementOfTree(root);
-        return rightLength + 1;
     }
 }
 
@@ -136,4 +119,35 @@ void printPictureOfTree(Tree *&root, int space) {
     
     cout << root->data.nameOfClass << endl;
     printPictureOfTree(root->left, space);
+}
+
+void printBiggestBranchHelper(Tree *root, std::vector<Data>& biggestBranch) {
+    if (root == nullptr) {
+        return;
+    }
+
+    std::vector<Data> leftBranch, rightBranch;
+    printBiggestBranchHelper(root->left, leftBranch);
+    printBiggestBranchHelper(root->right, rightBranch);
+
+    if (leftBranch.size() >= rightBranch.size()) {
+        leftBranch.push_back(root->data);
+        biggestBranch = leftBranch;
+    } else {
+        rightBranch.push_back(root->data);
+        biggestBranch = rightBranch;
+    }
+}
+
+void printBiggestBranch(Tree *root) {
+    if (root == nullptr) {
+        return;
+    }
+
+    std::vector<Data> biggestBranch;
+    printBiggestBranchHelper(root, biggestBranch);
+
+    for (auto& data : biggestBranch) {
+        printElementOfTree(data);
+    }
 }
