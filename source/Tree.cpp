@@ -19,11 +19,11 @@ bool compareTwoStrings(const string &first, const string &second) {
     
     for (size_t i = 0; i < size; i++)   {
         if(firstString[i] < secondString[i]) {
-            return 1;
+            return true;
         }
     }
 
-    return 0;
+    return false;
 }
 
 
@@ -50,6 +50,12 @@ void createElementOfTree(Tree *&element, const Data &d) {
     element->right = nullptr;
 }
 
+void printElementOfTree(Tree *&element) {
+    std::cout << std::setw(25) << element->data.nameOfClass
+              << std::setw(25) << element->data.placeOFResidence
+              << std::setw(25) << element->data.numberOfSubclasses << std::endl;
+}
+
 void addNewElementToTree(Tree *&root, const Data &d) {
     if(root == nullptr) {
         createElementOfTree(root, d);
@@ -59,24 +65,41 @@ void addNewElementToTree(Tree *&root, const Data &d) {
     if(compareTwoStrings(root->data.nameOfClass, d.nameOfClass)) {
         addNewElementToTree(root->right, d);
     }
-    else if(root->left == nullptr) {
+    else {
         addNewElementToTree(root->left, d);
     }
 }
 
-void printTree(Tree *&root, int space) {
+void printTree(Tree *&root) {
     if(root == nullptr) {
         return ;
     }
 
-    space+=10;
-    printTree(root->right, space);
+    printTree(root->left);
+    printElementOfTree(root);
+    printTree(root->right);
+}
 
-    cout << endl;
-    for (size_t i = 10; i < space; i++) {
-        cout << " ";
+void printFromLeftToRight(Tree *root) {
+    if (root == nullptr) {
+        return;
     }
-    
-    cout << root->data.nameOfClass << endl;
-    printTree(root->left, space);
+
+    std::queue<Tree*> q;
+    q.push(root);
+
+    while (!q.empty()) {
+        Tree *current = q.front();
+        q.pop();
+
+        printElementOfTree(current);
+
+        if (current->left != nullptr) {
+            q.push(current->left);
+        }
+
+        if (current->right != nullptr) {
+            q.push(current->right);
+        }
+    }
 }

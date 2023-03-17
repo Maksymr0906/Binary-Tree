@@ -18,7 +18,12 @@ int main() {
             addNewElementToTree(root, data);
             break;
         
-        case Option::PRINT_RIM_FROM_LEFT_TO_RIGHT:
+        case Option::PRINT_FROM_LEFT_TO_RIGHT:
+            if(root != nullptr) {
+                printArticle();
+                printFromLeftToRight(root);
+            }
+            else std::cout << "The tree is empty" << std::endl;
             break;
 
         case Option::PRINT_NODES_WITH_SIMILAR_PLACE_OF_RESIDENCE:
@@ -31,7 +36,14 @@ int main() {
             break;
 
         case Option::PRINT_TREE:
-            printTree(root, 0);
+            if(root != nullptr) {
+                printArticle();
+                printTree(root);
+            }
+            else std::cout << "The tree is empty" << std::endl;
+            break;
+            
+        case Option::EXIT:
             break;
 
         default:
